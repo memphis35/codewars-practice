@@ -2,6 +2,7 @@ package org.example.fifth;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntFunction;
 import java.util.stream.IntStream;
 
@@ -131,4 +132,16 @@ public class FifthKyuTasks {
         return result;
     }
 
+    /**
+     * Write a function that takes a string of parentheses, and determines if the order of the parentheses is valid. The
+     * function should return true if the string is valid, and false if it's invalid.
+     */
+    public static boolean validParentheses(String parens) {
+        final AtomicInteger stack = new AtomicInteger(0);
+            final boolean allMatch = parens.chars()
+                .mapToObj(ch -> (char) ch)
+                .filter(ch -> ch == '(' || ch == ')')
+                .allMatch(ch -> (ch == ')' ? stack.incrementAndGet() : stack.decrementAndGet()) >= 0);
+        return allMatch && stack.intValue() == 0;
+    }
 }
