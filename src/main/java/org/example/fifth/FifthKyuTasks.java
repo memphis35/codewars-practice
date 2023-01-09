@@ -35,7 +35,9 @@ public class FifthKyuTasks {
             } else {
                 final Sequences sequences = new Sequences(raw[i], raw[i + 1]);
                 int j = i + 2;
-                while (j < raw.length && sequences.add(raw[j])) j++;
+                while (j < raw.length && sequences.add(raw[j])) {
+                    j++;
+                }
                 result.add(sequences.toString());
                 i += sequences.size() - 1;
             }
@@ -44,6 +46,7 @@ public class FifthKyuTasks {
     }
 
     public static class Sequences {
+
         private final List<Integer> sequence = new ArrayList<>();
         public final int difference;
 
@@ -92,11 +95,9 @@ public class FifthKyuTasks {
     }
 
     /**
-     * Complete the function that
-     * accepts two integer arrays of equal length
-     * compares the value each member in one array to the corresponding member in the other
-     * squares the absolute value difference between those two values
-     * and returns the average of those squared absolute value difference between each member pair.
+     * Complete the function that accepts two integer arrays of equal length compares the value each member in one array
+     * to the corresponding member in the other squares the absolute value difference between those two values and
+     * returns the average of those squared absolute value difference between each member pair.
      */
     public static double solution(int[] arr1, int[] arr2) {
         return IntStream.range(0, arr1.length)
@@ -106,15 +107,28 @@ public class FifthKyuTasks {
     }
 
     /**
-     * In this example you have to validate if a user input string is alphanumeric. The given string is not nil/null/NULL/None, so you don't have to check that.
-     * The string has the following conditions to be alphanumeric:
-     * At least one character ("" is not valid)
-     * Allowed characters are uppercase / lowercase latin letters and digits from 0 to 9
-     * No whitespaces / underscore
+     * In this example you have to validate if a user input string is alphanumeric. The given string is not
+     * nil/null/NULL/None, so you don't have to check that. The string has the following conditions to be alphanumeric:
+     * At least one character ("" is not valid) Allowed characters are uppercase / lowercase latin letters and digits
+     * from 0 to 9 No whitespaces / underscore
      */
-    public static boolean alphanumeric(String s){
-        return s.matches("^[a-zA-Z0-9]+$");
+    public static boolean alphanumeric(String s) {
+        return s.matches("^[a-zA-Z\\d]+$");
     }
 
+    /**
+     * Create a function that returns an array containing the first l numbers from the nth diagonal of Pascal's
+     * triangle.
+     */
+    public static long[] generateDiagonal(int n, int l) {
+        final long[] result = new long[l];
+        if (l > 0) {
+            result[0] = 1L;
+            for (int i = 1; i < l; i++) {
+                result[i] = (result[i - 1] * (n + i)) / i;
+            }
+        }
+        return result;
+    }
 
 }
